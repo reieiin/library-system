@@ -1,0 +1,12 @@
+Options -Indexes
+
+RewriteEngine On
+
+# 1. Add .php extension if the file exists
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+# 2. If the file/folder doesn't exist, send the request to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

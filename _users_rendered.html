@@ -1,0 +1,791 @@
+
+Notice: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\librarySystem\app\middleware\admin.php on line 2
+<head>
+      <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - Library System</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/librarySystem/public/assets/img/favicon.png?v=1776787979" rel="icon" type="image/png">
+  <link href="/librarySystem/public/assets/img/favicon.png?v=1776787979" rel="shortcut icon" type="image/png">
+  <link href="/librarySystem/public/assets/img/apple-touch-icon.png?v=1776787979" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/librarySystem/public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/librarySystem/public/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/librarySystem/public/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/librarySystem/public/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/librarySystem/public/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/librarySystem/public/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/librarySystem/public/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/librarySystem/public/assets/css/style.css?v=1776787979" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<body>
+  <!-- ======= Topbar ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center">
+      <a href="index" class="logo d-flex align-items-center" style="width: auto;">
+        <img src="/librarySystem/public/assets/img/logo.png?v=1776787979" alt="Library System Logo">
+        <span class="d-none d-lg-block">Library System</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn" style="padding-left: 17px;"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="/librarySystem/public/assets/img/profile1.jpg?v=1776787979" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Admin</h6>
+              <span>Administrator</span>
+            </li>
+            <li>
+
+            <form action="../../app/controllers/adminController.php" method="POST">
+              <button type="submit" name="logoutButton" class="dropdown-item d-flex align-items-center">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+
+
+
+    <li class="nav-heading">User Management</li>
+
+    <li class="nav-item">
+      <a class="nav-link " href="users">
+        <i class="bi bi-person"></i>
+        <span>Users</span>
+      </a>
+    </li>
+
+    <li class="nav-heading">Library Management</li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="books">
+        <i class="bi bi-book"></i>
+        <span>Books</span>
+      </a>
+
+      <a class="nav-link collapsed" href="categories">
+        <i class="bi bi-list-ul"></i>
+        <span>Categories</span>
+      </a>
+
+      <a class="nav-link collapsed" href="authors">
+        <i class="bi bi-person-vcard"></i>
+        <span>Authors</span>
+      </a>
+
+    </li>
+
+    <li class="nav-heading">Transactions</li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="borrow-records">
+        <i class="bi bi-receipt-cutoff"></i>
+        <span>Borrow Records</span>
+      </a>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="reservations">
+        <i class="bi bi-calendar-check"></i>
+        <span>Reservations</span>
+      </a>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="fines">
+        <i class="bi bi-cash-coin"></i>
+        <span>Fines</span>
+      </a>
+    </li>
+
+    <li class="nav-heading">Reports</li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="activity-logs">
+        <i class="bi bi-list-check"></i>
+        <span>Activity Logs</span>
+      </a>
+    </li>
+
+
+
+  </ul>
+
+</aside><!-- End Sidebar-->
+
+<main id="main" class="main"><style>
+    .action-controls {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+    }
+
+    .action-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+    }
+</style>
+
+<div class="pagetitle">
+    <h1>Users</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index">Home</a></li>
+            <li class="breadcrumb-item active">Users</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users <span>| Accounts</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>8</h6>
+                            <span class="text-muted small pt-2 ps-1">Registered users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+                <div class="card-body">
+                    <h5 class="card-title">Roles <span>| Available</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>2</h6>
+                            <span class="text-muted small pt-2 ps-1">Role records</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-4 col-xl-12">
+            <div class="card info-card customers-card">
+                <div class="card-body">
+                    <h5 class="card-title">Latest Signup <span>| Activity</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>Apr 21, 2026</h6>
+                            <span class="text-muted small pt-2 ps-1">Most recent account</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <div>
+                            <h5 class="card-title mb-1">User Directory <span>| Manage accounts</span></h5>
+                            <p class="text-muted mb-0">Add, edit, and delete users while keeping role assignments in sync.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                            <i class="bi bi-person-plus me-1"></i>Add User
+                        </button>
+                    </div>
+
+                    <div class="table-responsive mt-3">
+                        <table class="table table-borderless datatable align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Created At</th>
+                                    <th scope="col" class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Test2 User2</div>
+                                                <small class="text-muted">8d5d1158-d0d4-4218-9ee8-b8a9d03d263d</small>
+                                            </td>
+                                            <td>testuser2@gmail.com</td>
+                                            <td>testuser</td>
+                                            <td>
+                                                <span class="badge bg-success">user</span>
+                                            </td>
+                                            <td>Apr 21, 2026 11:55 PM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="10"
+                                                        data-first-name="Test2"
+                                                        data-last-name="User2"
+                                                        data-email="testuser2@gmail.com"
+                                                        data-username="testuser"
+                                                        data-street="test"
+                                                        data-barangay="test"
+                                                        data-city="test"
+                                                        data-role-id="2"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="10">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Angela Reyes</div>
+                                                <small class="text-muted">827b5df4-3d8e-11f1-8249-088fc301cae4</small>
+                                            </td>
+                                            <td>angela.reyes@example.com</td>
+                                            <td>angela02</td>
+                                            <td>
+                                                <span class="badge bg-success">user</span>
+                                            </td>
+                                            <td>Apr 21, 2026 10:29 PM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="9"
+                                                        data-first-name="Angela"
+                                                        data-last-name="Reyes"
+                                                        data-email="angela.reyes@example.com"
+                                                        data-username="angela02"
+                                                        data-street="Palm Street"
+                                                        data-barangay="Barangay 4"
+                                                        data-city="Davao City"
+                                                        data-role-id="2"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="9">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Carlos Mendez</div>
+                                                <small class="text-muted">827b5b86-3d8e-11f1-8249-088fc301cae4</small>
+                                            </td>
+                                            <td>carlos.mendez@example.com</td>
+                                            <td>carlos01</td>
+                                            <td>
+                                                <span class="badge bg-success">user</span>
+                                            </td>
+                                            <td>Apr 21, 2026 10:29 PM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="8"
+                                                        data-first-name="Carlos"
+                                                        data-last-name="Mendez"
+                                                        data-email="carlos.mendez@example.com"
+                                                        data-username="carlos01"
+                                                        data-street="Sunset Drive"
+                                                        data-barangay="Barangay 3"
+                                                        data-city="Davao City"
+                                                        data-role-id="2"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="8">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Maria Santos</div>
+                                                <small class="text-muted">4edb7a8d-3d8e-11f1-8249-088fc301cae4</small>
+                                            </td>
+                                            <td>maria.santos@example.com</td>
+                                            <td>maria123</td>
+                                            <td>
+                                                <span class="badge bg-success">user</span>
+                                            </td>
+                                            <td>Apr 21, 2026 10:28 PM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="7"
+                                                        data-first-name="Maria"
+                                                        data-last-name="Santos"
+                                                        data-email="maria.santos@example.com"
+                                                        data-username="maria123"
+                                                        data-street="Street 2"
+                                                        data-barangay="Barangay 2"
+                                                        data-city="Davao City"
+                                                        data-role-id="2"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="7">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Juan Dela Cruz</div>
+                                                <small class="text-muted">4edb7792-3d8e-11f1-8249-088fc301cae4</small>
+                                            </td>
+                                            <td>juan.delacruz@example.com</td>
+                                            <td>juan123</td>
+                                            <td>
+                                                <span class="badge bg-success">user</span>
+                                            </td>
+                                            <td>Apr 21, 2026 10:28 PM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="6"
+                                                        data-first-name="Juan"
+                                                        data-last-name="Dela Cruz"
+                                                        data-email="juan.delacruz@example.com"
+                                                        data-username="juan123"
+                                                        data-street="Street 1"
+                                                        data-barangay="Barangay 1"
+                                                        data-city="Davao City"
+                                                        data-role-id="2"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="6">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Guia Cluadette Ansin</div>
+                                                <small class="text-muted">454856ff-6bd1-4bf1-bc03-f9b2a6f07b05</small>
+                                            </td>
+                                            <td>ansin.guiacluadette05@gmail.com</td>
+                                            <td>cluadette05</td>
+                                            <td>
+                                                <span class="badge bg-danger">admin</span>
+                                            </td>
+                                            <td>Apr 08, 2026 02:37 PM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="2"
+                                                        data-first-name="Guia Cluadette"
+                                                        data-last-name="Ansin"
+                                                        data-email="ansin.guiacluadette05@gmail.com"
+                                                        data-username="cluadette05"
+                                                        data-street="Balongis"
+                                                        data-barangay="Balulang"
+                                                        data-city="Cagayan de Oro City"
+                                                        data-role-id="1"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="2">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Reinard Collera</div>
+                                                <small class="text-muted">23bb4e5c-966a-4300-bdbd-2de72cd6ca15</small>
+                                            </td>
+                                            <td>collera.reinard@gmailcom</td>
+                                            <td>reinard12</td>
+                                            <td>
+                                                <span class="badge bg-danger">admin</span>
+                                            </td>
+                                            <td>Apr 06, 2026 07:12 PM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="1"
+                                                        data-first-name="Reinard"
+                                                        data-last-name="Collera"
+                                                        data-email="collera.reinard@gmailcom"
+                                                        data-username="reinard12"
+                                                        data-street="Villa de Oro"
+                                                        data-barangay="Kauswagan"
+                                                        data-city="Cagayan de Oro City"
+                                                        data-role-id="1"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="1">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Test User</div>
+                                                <small class="text-muted">0d0ddd57-3d77-492b-911d-c49bf4957f3f</small>
+                                            </td>
+                                            <td>testuser@gmail.com</td>
+                                            <td>testuser1</td>
+                                            <td>
+                                                <span class="badge bg-success">user</span>
+                                            </td>
+                                            <td>Nov 30, -0001 12:00 AM</td>
+                                            <td class="text-end">
+                                                <div class="action-controls">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-primary action-btn edit-user-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal"
+                                                        data-user-id="5"
+                                                        data-first-name="Test"
+                                                        data-last-name="User"
+                                                        data-email="testuser@gmail.com"
+                                                        data-username="testuser1"
+                                                        data-street="C.M. Recto Avenue"
+                                                        data-barangay="Lapasan"
+                                                        data-city="Cagayan de Oro City"
+                                                        data-role-id="2"
+                                                    >
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+
+                                                    <form action="/librarySystem/public/admin/users.php" method="post" onsubmit="return confirm('Delete this user?');" class="m-0">
+                                                        <input type="hidden" name="user_action" value="delete">
+                                                        <input type="hidden" name="user_id" value="5">
+                                                        <button type="submit" class="btn btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/librarySystem/public/admin/users.php" method="post" autocomplete="off">
+                <input type="hidden" name="user_action" value="add">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Role</label>
+                            <select name="role_id" class="form-select" required>
+                                <option value="">Select role</option>
+                                                                    <option value="1">admin</option>
+                                                                    <option value="2">user</option>
+                                                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Street</label>
+                            <input type="text" name="street" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Barangay</label>
+                            <input type="text" name="barangay" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">City</label>
+                            <input type="text" name="city" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/librarySystem/public/admin/users.php" method="post" autocomplete="off">
+                <input type="hidden" name="user_action" value="update">
+                <input type="hidden" name="user_id" id="edit_user_id">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" id="edit_first_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" id="edit_last_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" id="edit_email" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" id="edit_username" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current password">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Role</label>
+                            <select name="role_id" id="edit_role_id" class="form-select" required>
+                                <option value="">Select role</option>
+                                                                    <option value="1">admin</option>
+                                                                    <option value="2">user</option>
+                                                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Street</label>
+                            <input type="text" name="street" id="edit_street" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Barangay</label>
+                            <input type="text" name="barangay" id="edit_barangay" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">City</label>
+                            <input type="text" name="city" id="edit_city" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const editButtons = document.querySelectorAll('.edit-user-btn');
+
+        editButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                document.getElementById('edit_user_id').value = button.dataset.userId || '';
+                document.getElementById('edit_first_name').value = button.dataset.firstName || '';
+                document.getElementById('edit_last_name').value = button.dataset.lastName || '';
+                document.getElementById('edit_email').value = button.dataset.email || '';
+                document.getElementById('edit_username').value = button.dataset.username || '';
+                document.getElementById('edit_street').value = button.dataset.street || '';
+                document.getElementById('edit_barangay').value = button.dataset.barangay || '';
+                document.getElementById('edit_city').value = button.dataset.city || '';
+                document.getElementById('edit_role_id').value = button.dataset.roleId || '';
+            });
+        });
+    });
+</script>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <!-- 
+  <div class="copyright">
+    &copy; Copyright <strong><span>Library System</span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    All the links in the footer should remain intact.
+    You can delete the links only if you purchased the pro version.
+    Licensing information: https://bootstrapmade.com/license/
+    Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+  </div>
+  -->
+</footer><!-- End Footer -->
+
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/librarySystem/public/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/librarySystem/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/librarySystem/public/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/librarySystem/public/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/librarySystem/public/assets/vendor/quill/quill.js"></script>
+<script src="/librarySystem/public/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/librarySystem/public/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/librarySystem/public/assets/vendor/php-email-form/validate.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Template Main JS File -->
+<script src="/librarySystem/public/assets/js/main.js"></script>
+
+
+
+</body>
+
+</html>

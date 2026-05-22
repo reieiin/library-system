@@ -1,0 +1,79 @@
+html {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../background/bg1.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100%;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: scroll; /* Always show vertical scrollbar to prevent layout shift */
+    background: transparent !important; /* Make body transparent so html background shows */
+    /* Remove background from body so it doesn't interfere */
+  }
+  
+  main .container {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+  
+  .section.register {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .card {
+    background-color: #F5F1E8; /* Cream/beige color */
+    backdrop-filter: blur(10px); /* Optional: adds a blur effect */
+    border: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Accent Color Overrides */
+  .btn-primary {
+    background-color: #8B4513 !important; /* Saddle brown */
+    border-color: #8B4513 !important;
+    color: white !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: #654321 !important; /* Darker brown on hover */
+    border-color: #654321 !important;
+  }
+  
+  .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25) !important;
+  }
+  
+  /* Link colors */
+  a {
+    color: #8B4513 !important;
+  }
+  
+  a:hover {
+    color: #654321 !important;
+  }
+  
+  /* Form input focus colors */
+  .form-control:focus {
+    border-color: #8B4513 !important;
+    box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25) !important;
+  }
+  
+  /* Text colors */
+  .card-title {
+    color: #8B4513 !important; /* Title color */
+  }
+  
+  .form-label {
+    color: #654321 !important; /* Label color */
+  }
