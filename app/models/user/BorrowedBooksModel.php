@@ -3,7 +3,7 @@
 if (!function_exists('userGetBorrowRecordForReturnModel')) {
     function userGetBorrowRecordForReturnModel(mysqli $conn, int $borrowId, int $userId): ?array
     {
-        $borrowStmt = $conn->prepare('SELECT book_id, status FROM borrow_records WHERE borrow_id = ? AND user_id = ? LIMIT 1 FOR UPDATE');
+        $borrowStmt = $conn->prepare('SELECT br.book_id, br.status, b.title AS book_title FROM borrow_records br INNER JOIN books b ON br.book_id = b.book_id WHERE br.borrow_id = ? AND br.user_id = ? LIMIT 1 FOR UPDATE');
         $borrowStmt->bind_param('ii', $borrowId, $userId);
         $borrowStmt->execute();
         $borrowResult = $borrowStmt->get_result();
