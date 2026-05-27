@@ -43,6 +43,40 @@ if (!function_exists('adminHandleBorrowRecordAction')) {
             }
         }
 
+        if ($action === 'mark_unreturned') {
+            $conn->begin_transaction();
+
+            try {
+                $record = adminGetBorrowRecordForAction($conn, $borrowId);
+
+                if ($record === null) {
+                    throw new Exception('Borrow record not found.');
+                }
+
+                if ($record['status'] !== 'returned') {
+                    throw new Exception('Only returned books can be marked as unreturned.');
+                }
+
+                if (!adminMarkBorrowRecordUnreturned($conn, $borrowId)) {
+                    throw new Exception('Unable to update borrow record.');
+                }
+
+                $bookId = (int) $record['book_id'];
+
+                if (!adminDecreaseBookCopies($conn, $bookId)) {
+                    throw new Exception('Unable to update book copies.');
+                }
+
+                $conn->commit();
+
+                logActivity($conn, (int) ($_SESSION['user_id'] ?? 0), 'Marked borrow record as unreturned: ' . (string) ($record['book_title'] ?? 'Book #' . $borrowId));
+                redirectWithFlash('success', 'Borrow record marked as unreturned.');
+            } catch (Throwable $exception) {
+                $conn->rollback();
+                redirectWithFlash('error', 'Unable to mark record as unreturned.');
+            }
+        }
+
         if ($action === 'set_overdue') {
             $conn->begin_transaction();
 

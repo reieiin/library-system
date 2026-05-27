@@ -32,10 +32,34 @@ if (!function_exists('adminMarkBorrowRecordReturned')) {
     }
 }
 
+if (!function_exists('adminMarkBorrowRecordUnreturned')) {
+    function adminMarkBorrowRecordUnreturned(mysqli $conn, int $borrowId): bool
+    {
+        $updateRecordStmt = $conn->prepare('UPDATE borrow_records SET status = "borrowed", return_date = NULL WHERE borrow_id = ? AND status = "returned"');
+        $updateRecordStmt->bind_param('i', $borrowId);
+        $result = $updateRecordStmt->execute();
+        $updateRecordStmt->close();
+
+        return $result;
+    }
+}
+
 if (!function_exists('adminIncreaseBookCopies')) {
     function adminIncreaseBookCopies(mysqli $conn, int $bookId): bool
     {
         $updateBookStmt = $conn->prepare('UPDATE books SET available_copies = LEAST(total_copies, available_copies + 1) WHERE book_id = ?');
+        $updateBookStmt->bind_param('i', $bookId);
+        $result = $updateBookStmt->execute();
+        $updateBookStmt->close();
+
+        return $result;
+    }
+}
+
+if (!function_exists('adminDecreaseBookCopies')) {
+    function adminDecreaseBookCopies(mysqli $conn, int $bookId): bool
+    {
+        $updateBookStmt = $conn->prepare('UPDATE books SET available_copies = available_copies - 1 WHERE book_id = ? AND available_copies > 0');
         $updateBookStmt->bind_param('i', $bookId);
         $result = $updateBookStmt->execute();
         $updateBookStmt->close();
