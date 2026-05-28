@@ -2,20 +2,6 @@
 
 require_once __DIR__ . '/../../models/admin/AuthorsModel.php';
 
-if (!function_exists('adminAuthorHasBooks')) {
-    function adminAuthorHasBooks(mysqli $conn, int $authorId): bool
-    {
-        $stmt = $conn->prepare('SELECT book_id FROM book_authors WHERE author_id = ? LIMIT 1');
-        $stmt->bind_param('i', $authorId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $hasBooks = $result->num_rows > 0;
-        $stmt->close();
-
-        return $hasBooks;
-    }
-}
-
 if (!function_exists('adminHandleAuthorAction')) {
     function adminHandleAuthorAction(mysqli $conn): void
     {
@@ -34,22 +20,32 @@ if (!function_exists('adminHandleAuthorAction')) {
             }
 
             if ($action === 'add') {
+                if (adminAuthorNameExists($conn, $authorName)) {
+                    redirectWithFlash('error', 'Author name already exists.');
+                }
+
                 if (adminAddAuthor($conn, $authorName)) {
                     redirectWithFlash('success', 'Author added successfully.');
                 }
 
-                redirectWithFlash('error', 'Unable to add author right now.');
+                $errorMessage = $conn->errno === 1062 ? 'Author name already exists.' : 'Unable to add author right now.';
+                redirectWithFlash('error', $errorMessage);
             }
 
             if ($authorId <= 0) {
                 redirectWithFlash('error', 'Invalid author selected for update.');
             }
 
+            if (adminAuthorNameExists($conn, $authorName, $authorId)) {
+                redirectWithFlash('error', 'Author name already exists.');
+            }
+
             if (adminUpdateAuthor($conn, $authorName, $authorId)) {
                 redirectWithFlash('success', 'Author updated successfully.');
             }
 
-            redirectWithFlash('error', 'Unable to update author right now.');
+            $errorMessage = $conn->errno === 1062 ? 'Author name already exists.' : 'Unable to update author right now.';
+            redirectWithFlash('error', $errorMessage);
         }
 
         if ($action === 'delete') {
@@ -69,19 +65,5 @@ if (!function_exists('adminHandleAuthorAction')) {
 
             redirectWithFlash('error', 'Unable to delete author right now.');
         }
-    }
-}
-
-if (!function_exists('adminGetAuthors')) {
-    function adminGetAuthors(mysqli $conn): array
-    {
-        return fetchAllRows($conn, 'SELECT author_id, author_name FROM authors ORDER BY author_name ASC');
-    }
-}
-
-if (!function_exists('adminGetAuthorCount')) {
-    function adminGetAuthorCount(mysqli $conn): int
-    {
-        return fetchCount($conn, 'SELECT COUNT(*) AS total FROM authors');
     }
 }

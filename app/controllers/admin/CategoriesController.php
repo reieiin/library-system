@@ -2,20 +2,6 @@
 
 require_once __DIR__ . '/../../models/admin/CategoriesModel.php';
 
-if (!function_exists('adminCategoryHasBooks')) {
-    function adminCategoryHasBooks(mysqli $conn, int $categoryId): bool
-    {
-        $stmt = $conn->prepare('SELECT book_id FROM books WHERE category_id = ? LIMIT 1');
-        $stmt->bind_param('i', $categoryId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $hasBooks = $result->num_rows > 0;
-        $stmt->close();
-
-        return $hasBooks;
-    }
-}
-
 if (!function_exists('adminHandleCategoryAction')) {
     function adminHandleCategoryAction(mysqli $conn): void
     {
@@ -34,16 +20,15 @@ if (!function_exists('adminHandleCategoryAction')) {
             }
 
             if ($action === 'add') {
-                $stmt = $conn->prepare('INSERT INTO categories (category_name) VALUES (?)');
-                $stmt->bind_param('s', $categoryName);
+                if (adminCategoryNameExists($conn, $categoryName)) {
+                    redirectWithFlash('error', 'Category name already exists.');
+                }
 
-                if ($stmt->execute()) {
-                    $stmt->close();
+                if (adminAddCategory($conn, $categoryName)) {
                     redirectWithFlash('success', 'Category added successfully.');
                 }
 
                 $errorMessage = $conn->errno === 1062 ? 'Category name already exists.' : 'Unable to add category right now.';
-                $stmt->close();
                 redirectWithFlash('error', $errorMessage);
             }
 
@@ -51,16 +36,15 @@ if (!function_exists('adminHandleCategoryAction')) {
                 redirectWithFlash('error', 'Invalid category selected for update.');
             }
 
-            $stmt = $conn->prepare('UPDATE categories SET category_name = ? WHERE category_id = ?');
-            $stmt->bind_param('si', $categoryName, $categoryId);
+            if (adminCategoryNameExists($conn, $categoryName, $categoryId)) {
+                redirectWithFlash('error', 'Category name already exists.');
+            }
 
-            if ($stmt->execute()) {
-                $stmt->close();
+            if (adminUpdateCategory($conn, $categoryName, $categoryId)) {
                 redirectWithFlash('success', 'Category updated successfully.');
             }
 
             $errorMessage = $conn->errno === 1062 ? 'Category name already exists.' : 'Unable to update category right now.';
-            $stmt->close();
             redirectWithFlash('error', $errorMessage);
         }
 
@@ -75,16 +59,11 @@ if (!function_exists('adminHandleCategoryAction')) {
                 redirectWithFlash('warning', 'This category cannot be deleted because it is being used by one or more books.');
             }
 
-            $stmt = $conn->prepare('DELETE FROM categories WHERE category_id = ?');
-            $stmt->bind_param('i', $categoryId);
-
-            if ($stmt->execute()) {
-                $stmt->close();
+            if (adminDeleteCategory($conn, $categoryId)) {
                 redirectWithFlash('success', 'Category deleted successfully.');
             }
 
             $errorMessage = $conn->errno === 1451 ? 'This category is in use by books.' : 'Unable to delete category right now.';
-            $stmt->close();
             redirectWithFlash('error', $errorMessage);
         }
     }

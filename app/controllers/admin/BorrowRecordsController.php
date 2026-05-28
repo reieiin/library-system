@@ -57,11 +57,37 @@ if (!function_exists('adminHandleBorrowRecordAction')) {
                     throw new Exception('Only returned books can be marked as unreturned.');
                 }
 
+                $userId = (int) ($record['user_id'] ?? 0);
+                $bookId = (int) ($record['book_id'] ?? 0);
+
+                if ($userId <= 0 || $bookId <= 0) {
+                    throw new Exception('Invalid borrow record data.');
+                }
+
+                $latestStmt = $conn->prepare('SELECT borrow_id FROM borrow_records WHERE user_id = ? AND book_id = ? ORDER BY borrow_id DESC LIMIT 1');
+                $latestStmt->bind_param('ii', $userId, $bookId);
+                $latestStmt->execute();
+                $latestResult = $latestStmt->get_result();
+
+                if ($latestResult->num_rows === 0) {
+                    $latestStmt->close();
+                    throw new Exception('Borrow record not found.');
+                }
+
+                $latestRow = $latestResult->fetch_assoc();
+                $latestStmt->close();
+
+                if ((int) ($latestRow['borrow_id'] ?? 0) !== $borrowId) {
+                    throw new Exception('Only the latest returned borrow for this user and book can be marked as unreturned.');
+                }
+
+                if (adminUserHasActiveBorrowForBook($conn, $userId, $bookId, $borrowId)) {
+                    throw new Exception('This user already has an active borrow for the same book.');
+                }
+
                 if (!adminMarkBorrowRecordUnreturned($conn, $borrowId)) {
                     throw new Exception('Unable to update borrow record.');
                 }
-
-                $bookId = (int) $record['book_id'];
 
                 if (!adminDecreaseBookCopies($conn, $bookId)) {
                     throw new Exception('Unable to update book copies.');

@@ -96,7 +96,7 @@ $records = adminGetBorrowRecords($conn);
                                                                 </button>
                                                             </form>
                                                         <?php endif; ?>
-                                                    <?php else : ?>
+                                                    <?php elseif (!empty($record['can_unreturn'])) : ?>
                                                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="m-0" title="Mark as Unreturned">
                                                             <input type="hidden" name="record_action" value="mark_unreturned">
                                                             <input type="hidden" name="borrow_id" value="<?php echo htmlspecialchars($record['borrow_id']); ?>">

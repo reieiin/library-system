@@ -13,6 +13,26 @@ if (!function_exists('adminAddAuthor')) {
     }
 }
 
+if (!function_exists('adminAuthorNameExists')) {
+    function adminAuthorNameExists(mysqli $conn, string $authorName, ?int $ignoreAuthorId = null): bool
+    {
+        if ($ignoreAuthorId !== null && $ignoreAuthorId > 0) {
+            $stmt = $conn->prepare('SELECT author_id FROM authors WHERE author_name = ? AND author_id <> ? LIMIT 1');
+            $stmt->bind_param('si', $authorName, $ignoreAuthorId);
+        } else {
+            $stmt = $conn->prepare('SELECT author_id FROM authors WHERE author_name = ? LIMIT 1');
+            $stmt->bind_param('s', $authorName);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $exists = $result->num_rows > 0;
+        $stmt->close();
+
+        return $exists;
+    }
+}
+
 if (!function_exists('adminUpdateAuthor')) {
     function adminUpdateAuthor(mysqli $conn, string $authorName, int $authorId): bool
     {

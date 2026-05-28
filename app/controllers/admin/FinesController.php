@@ -17,16 +17,11 @@ if (!function_exists('adminHandleFineAction')) {
         }
 
         if ($action === 'mark_paid') {
-            $stmt = $conn->prepare('UPDATE fines SET status = "paid" WHERE fine_id = ? AND status = "unpaid"');
-            $stmt->bind_param('i', $fineId);
-
-            if ($stmt->execute()) {
-                $stmt->close();
+            if (adminMarkFinePaid($conn, $fineId)) {
                 logActivity($conn, (int) ($_SESSION['user_id'] ?? 0), 'Marked fine as paid #' . $fineId);
                 redirectWithFlash('success', 'Fine marked as paid.');
             }
 
-            $stmt->close();
             redirectWithFlash('error', 'Unable to mark fine as paid.');
         }
     }

@@ -21,3 +21,16 @@ if (!function_exists('adminGetFines')) {
         ');
     }
 }
+
+if (!function_exists('adminMarkFinePaid')) {
+    function adminMarkFinePaid(mysqli $conn, int $fineId): bool
+    {
+        $stmt = $conn->prepare('UPDATE fines SET status = "paid" WHERE fine_id = ? AND status = "unpaid"');
+        $stmt->bind_param('i', $fineId);
+
+        $result = $stmt->execute();
+        $stmt->close();
+
+        return $result;
+    }
+}
