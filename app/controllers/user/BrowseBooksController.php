@@ -66,9 +66,9 @@ if (!function_exists('userInsertReservationForBrowse')) {
 }
 
 if (!function_exists('userGetBrowsableBooks')) {
-    function userGetBrowsableBooks(mysqli $conn, int $userId): array
+    function userGetBrowsableBooks(mysqli $conn, int $userId, string $searchTerm = ''): array
     {
-        return userGetBrowsableBooksModel($conn, $userId);
+        return userGetBrowsableBooksModel($conn, $userId, $searchTerm);
     }
 }
 

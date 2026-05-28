@@ -203,6 +203,60 @@ body.user-area .btn-outline-primary:focus {
   justify-content: flex-end;
 }
 
+.user-browse-search {
+  max-width: 44rem;
+}
+
+.user-browse-search-group {
+  overflow: hidden;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(62, 39, 35, 0.06);
+}
+
+.user-browse-search-group .input-group-text,
+.user-browse-search-group .form-control,
+.user-browse-search-group .btn {
+  border-color: rgba(139, 69, 19, 0.14);
+}
+
+.user-browse-search-group .input-group-text {
+  background: rgba(255, 255, 255, 0.92);
+  color: #8b4513;
+}
+
+.user-browse-search-group .form-control {
+  min-height: 3.2rem;
+  border-left: 0;
+  border-right: 0;
+  background: rgba(255, 255, 255, 0.96);
+  color: #3e2723;
+}
+
+.user-browse-search-group .form-control:focus {
+  box-shadow: none;
+  border-color: rgba(139, 69, 19, 0.28);
+}
+
+.user-browse-search-group .btn {
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.user-browse-search-group .btn-outline-secondary {
+  color: #735f50;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.user-browse-search-group .btn-outline-secondary:hover,
+.user-browse-search-group .btn-outline-secondary:focus {
+  background: #f0e4d6;
+  color: #5b4638;
+}
+
 .user-browse-chip {
   display: inline-flex;
   align-items: center;

@@ -123,8 +123,21 @@ if (!function_exists('userInsertReservationForBrowseModel')) {
 }
 
 if (!function_exists('userGetBrowsableBooksModel')) {
-    function userGetBrowsableBooksModel(mysqli $conn, int $userId): array
+    function userGetBrowsableBooksModel(mysqli $conn, int $userId, string $searchTerm = ''): array
     {
+        $searchTerm = trim($searchTerm);
+        $searchClause = '';
+
+        if ($searchTerm !== '') {
+            $safeSearchTerm = $conn->real_escape_string($searchTerm);
+            $searchClause = '
+            WHERE (
+                b.title LIKE "%'. $safeSearchTerm .'%"
+                OR c.category_name LIKE "%'. $safeSearchTerm .'%"
+                OR a.author_name LIKE "%'. $safeSearchTerm .'%"
+            )';
+        }
+
         return userFetchAllRows($conn, '
             SELECT
                 b.book_id,
@@ -152,7 +165,7 @@ if (!function_exists('userGetBrowsableBooksModel')) {
             FROM books b
             INNER JOIN categories c ON b.category_id = c.category_id
             LEFT JOIN book_authors ba ON b.book_id = ba.book_id
-            LEFT JOIN authors a ON ba.author_id = a.author_id
+            LEFT JOIN authors a ON ba.author_id = a.author_id' . $searchClause . '
             GROUP BY b.book_id, b.title, c.category_name, b.available_copies, b.total_copies
             ORDER BY b.title ASC
         ');

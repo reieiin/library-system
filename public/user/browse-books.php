@@ -6,13 +6,14 @@ include_once '../../app/controllers/user/BrowseBooksController.php';
 $authUser = $_SESSION['authUser'] ?? [];
 $userId = (int) ($authUser['user_id'] ?? $_SESSION['user_id'] ?? 0);
 userHandleBrowseBookAction($conn, $userId);
+$searchTerm = trim((string) ($_GET['q'] ?? ''));
 
 $pageTitle = 'Browse Books - Library System';
 include('../includes/header.php');
 include('../includes/topbar.php');
 include('../includes/sidebar_user.php');
 
-$books = userGetBrowsableBooks($conn, $userId);
+$books = userGetBrowsableBooks($conn, $userId, $searchTerm);
 $browseStats = userGetBrowseStats($conn);
 ?>
 <div class="pagetitle">
@@ -41,6 +42,17 @@ $browseStats = userGetBrowseStats($conn);
         </div>
       </div>
     </div>
+
+    <form method="get" class="user-browse-search mt-3">
+      <div class="input-group user-browse-search-group">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input type="text" name="q" class="form-control" placeholder="Search by title, author, or category" value="<?php echo htmlspecialchars($searchTerm); ?>" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <?php if ($searchTerm !== '') { ?>
+          <a href="browse-books" class="btn btn-outline-secondary">Clear</a>
+        <?php } ?>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
   </div>
 
   <?php if (!empty($books)) { ?>
@@ -94,9 +106,9 @@ $browseStats = userGetBrowseStats($conn);
     </div>
     <?php } else { ?>
     <div class="user-empty-state">
-      <h3>No books found</h3>
-      <p>There are no items in the catalog right now. Please check back later or go to the dashboard.</p>
-      <a href="index" class="btn btn-primary user-action">Back to Dashboard</a>
+      <h3><?php echo $searchTerm !== '' ? 'No books match your search' : 'No books found'; ?></h3>
+      <p><?php echo $searchTerm !== '' ? 'Try a different title, author, or category.' : 'There are no items in the catalog right now. Please check back later or go to the dashboard.'; ?></p>
+      <a href="browse-books" class="btn btn-primary user-action"><?php echo $searchTerm !== '' ? 'Back to Browse Books' : 'Back to Dashboard'; ?></a>
     </div>
   <?php } ?>
 </section>
